@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA99883D27A990C00042B98A /* HabitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99883C27A990C00042B98A /* HabitsViewController.swift */; };
+		FA99883F27A990CD0042B98A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99883E27A990CD0042B98A /* InfoViewController.swift */; };
 		FADD3A1F27A98A150027E11B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD3A1E27A98A150027E11B /* AppDelegate.swift */; };
 		FADD3A2127A98A150027E11B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD3A2027A98A150027E11B /* SceneDelegate.swift */; };
 		FADD3A2327A98A150027E11B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD3A2227A98A150027E11B /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA99883C27A990C00042B98A /* HabitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewController.swift; sourceTree = "<group>"; };
+		FA99883E27A990CD0042B98A /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		FADD3A1B27A98A150027E11B /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADD3A1E27A98A150027E11B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FADD3A2027A98A150027E11B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 		FADD3A1D27A98A150027E11B /* MyHabits */ = {
 			isa = PBXGroup;
 			children = (
+				FA99883E27A990CD0042B98A /* InfoViewController.swift */,
+				FA99883C27A990C00042B98A /* HabitsViewController.swift */,
 				FADD3A1E27A98A150027E11B /* AppDelegate.swift */,
 				FADD3A2027A98A150027E11B /* SceneDelegate.swift */,
 				FADD3A2227A98A150027E11B /* ViewController.swift */,
@@ -140,6 +146,8 @@
 				FADD3A3327A98AED0027E11B /* HabitsStore.swift in Sources */,
 				FADD3A2327A98A150027E11B /* ViewController.swift in Sources */,
 				FADD3A1F27A98A150027E11B /* AppDelegate.swift in Sources */,
+				FA99883D27A990C00042B98A /* HabitsViewController.swift in Sources */,
+				FA99883F27A990CD0042B98A /* InfoViewController.swift in Sources */,
 				FADD3A2127A98A150027E11B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
