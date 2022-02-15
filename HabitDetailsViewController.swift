@@ -49,6 +49,7 @@ class HabitDetailsViewController: UIViewController {
         
         let editButton = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(editHabit))
         self.navigationItem.rightBarButtonItem = editButton
+        self.navigationItem.rightBarButtonItem?.tintColor = .systemPurple
 
     }
 
@@ -74,17 +75,14 @@ extension HabitDetailsViewController {
         view.addSubview(table)
         table.addSubview(headerLabel)
         table.backgroundColor = UIColor(named: "Background")
-        
-        let constraints = [
+        NSLayoutConstraint.activate([
             table.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             table.topAnchor.constraint(equalTo: view.topAnchor),
             table.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             table.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
             headerLabel.leadingAnchor.constraint(equalTo: table.leadingAnchor, constant: 16),
             headerLabel.topAnchor.constraint(equalTo: table.topAnchor, constant: 22)
-        ]
-        NSLayoutConstraint.activate(constraints)
+        ])
     }
 }
 
@@ -104,7 +102,7 @@ extension HabitDetailsViewController: UITableViewDataSource {
         let date = HabitsStore.shared.dates[indexPath.row]
         if HabitsStore.shared.habit(habit, isTrackedIn: date) {
                     cell.accessoryType = UITableViewCell.AccessoryType.checkmark
-            cell.tintColor = UIColor(named: "Color")
+            cell.tintColor = .systemPurple
                 }
         return cell
     }
@@ -117,7 +115,7 @@ extension HabitDetailsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 47
+        return 10
     }
     
 }

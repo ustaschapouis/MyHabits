@@ -12,14 +12,14 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     let progressTextLabel: UILabel = {
         let progressText = UILabel()
         progressText.text = "Все получится!!!"
-        progressText.font = .systemFont(ofSize: 13)
+        progressText.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        progressText.textColor = UIColor.systemGray
         progressText.translatesAutoresizingMaskIntoConstraints = false
         return progressText
     }()
     
     let progressPercentLabel: UILabel = {
         let progressPercent = UILabel()
-        progressPercent.text = "\(Int(HabitsStore.shared.todayProgress * 100))%"
         progressPercent.font = .systemFont(ofSize: 13)
         progressPercent.translatesAutoresizingMaskIntoConstraints = false
         return progressPercent
@@ -27,8 +27,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     
     let progressLineView: UIProgressView = {
         let progressLine = UIProgressView()
-        progressLine.setProgress(HabitsStore.shared.todayProgress, animated: true)
-        progressLine.progressTintColor = .purple
+        progressLine.tintColor = .systemPurple
         progressLine.translatesAutoresizingMaskIntoConstraints = false
         return progressLine
     }()
@@ -39,7 +38,6 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 8
-        
         contentView.addSubview(progressLineView)
         contentView.addSubview(progressTextLabel)
         contentView.addSubview(progressPercentLabel)
@@ -62,10 +60,13 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
+    override func layoutSubviews() {
+        progressLineView.setProgress(HabitsStore.shared.todayProgress, animated: true)
+        progressPercentLabel.text = "\(Int(HabitsStore.shared.todayProgress * 100))%"
+    }
+
 }

@@ -51,7 +51,7 @@ class HabitViewController: UIViewController {
         button.addTarget(self, action: #selector(toColorPick), for: .touchUpInside)
         button.layer.cornerRadius = 15
         button.clipsToBounds = true
-        button.backgroundColor = .systemIndigo
+        button.backgroundColor = .systemPurple
         return button
     }()
     
@@ -74,7 +74,7 @@ class HabitViewController: UIViewController {
     private lazy var timeEditLabel: UILabel = {
         let label = UILabel()
         label .translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor(named: "Color")
+        label.textColor = .systemPurple
         label.font = UIFont(name: "SFProText-Semibold", size: 13)
         label.text = "17:00"
         return label
@@ -125,7 +125,7 @@ class HabitViewController: UIViewController {
         }
     }
     
-    @objc func closeHdbitVC() {
+    @objc func closeHabitVC() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -180,29 +180,18 @@ class HabitViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow(notification:)),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide(notification:)),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print(scrollView.contentSize)
     }
 }
 
@@ -213,12 +202,12 @@ extension HabitViewController {
         } else {
             navigationItem.title = "Править"
         }
-        let cancelButton = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(closeHdbitVC))
-        cancelButton.tintColor = UIColor(named: "Color")
+        let cancelButton = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(closeHabitVC))
+        cancelButton.tintColor = .systemPurple
         self.navigationItem.leftBarButtonItem = cancelButton
         
         let saveButton = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveHabit))
-        saveButton.tintColor = UIColor(named: "Color")
+        saveButton.tintColor = .systemPurple
         self.navigationItem.rightBarButtonItem = saveButton
     }
 }
@@ -230,7 +219,7 @@ extension HabitViewController {
         self.scrollView.addSubview(contentView)
         [habitName,habitNameEdit,colorLabel,colorEditButton,timeLabel,timeCurentLabel,timeEditLabel,timeEdit,deleteButton].forEach {self.contentView.addSubview($0)}
         
-        let constraints = [
+        NSLayoutConstraint.activate([
             self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
@@ -245,7 +234,6 @@ extension HabitViewController {
             self.habitName.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             self.habitName.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 21),
             self.habitName.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -285),
-//            self.habitName.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -675),
 
             self.habitNameEdit.leadingAnchor.constraint(equalTo: self.habitName.leadingAnchor),
             self.habitNameEdit.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 46),
@@ -276,8 +264,8 @@ extension HabitViewController {
             self.deleteButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.deleteButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             self.deleteButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
+        ])
+     
     }
 }
 
@@ -307,7 +295,6 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
 }
 
 
-//Клавиатура:
 private extension HabitViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {

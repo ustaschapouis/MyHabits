@@ -71,13 +71,13 @@
 		FADD3A1D27A98A150027E11B /* MyHabits */ = {
 			isa = PBXGroup;
 			children = (
-				FA99883E27A990CD0042B98A /* InfoViewController.swift */,
 				FAED9E9627AAB5F8006C0B12 /* HabitViewController.swift */,
 				FA99883C27A990C00042B98A /* HabitsViewController.swift */,
 				FADD3A1E27A98A150027E11B /* AppDelegate.swift */,
 				FADD3A2027A98A150027E11B /* SceneDelegate.swift */,
 				FADD3A2227A98A150027E11B /* ViewController.swift */,
 				FADD3A3227A98AED0027E11B /* HabitsStore.swift */,
+				FA99883E27A990CD0042B98A /* InfoViewController.swift */,
 				FADD3A2727A98A180027E11B /* Assets.xcassets */,
 				FADD3A2927A98A180027E11B /* LaunchScreen.storyboard */,
 				FADD3A2C27A98A180027E11B /* Info.plist */,

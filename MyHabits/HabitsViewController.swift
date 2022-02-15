@@ -29,23 +29,20 @@ class HabitsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Сегодня"
-
+        view.addSubview(habitCollectionView)
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewHabit))
-        navigationItem.rightBarButtonItem?.tintColor = .purple
-        
-        habitCollectionView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: ProgressCollectionViewCell.self))
-        habitCollectionView.register(HabitCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: HabitCollectionViewCell.self))
-        
-        habitCollectionView.delegate = self
-        habitCollectionView.dataSource = self
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(toHabitVC))
+        navigationItem.rightBarButtonItem?.tintColor = .systemPurple
+        navigationController?.navigationBar.tintColor = .systemPurple
+        navigationItem.title = "Сегодня"
+        navigationController?.navigationBar.scrollEdgeAppearance = UINavigationBarAppearance()
+    
         habitCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         
-        view.addSubview(habitCollectionView)
         
         NSLayoutConstraint.activate([
             habitCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -55,65 +52,20 @@ class HabitsViewController: UIViewController {
         ])
     }
     
-
-    @objc func addNewHabit() {
-        print(#function)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        habitCollectionView.reloadData()
+    }
+    
+    @objc func toHabitVC() {
        let habitVC = HabitViewController(habit: nil)
         let habitNVC = UINavigationController(rootViewController: habitVC)
         habitVC.modalPresentationStyle = .fullScreen
         habitVC.modalTransitionStyle = .coverVertical
         self.present(habitNVC, animated: true, completion: nil)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        navigationController?.navigationBar.prefersLargeTitles = true
-        habitCollectionView.reloadData()
-        let barButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewHabit))
-        self.navigationItem.rightBarButtonItem = barButton
-    }
 }
     
-extension HabitsViewController: UICollectionViewDelegateFlowLayout {
-//    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat
-        width = collectionView.frame.width - 16 * 2
-        switch indexPath.section {
-        case 0:
-            return CGSize(width: width, height: 60)
-        case 1:
-            return CGSize(width: width, height: 130)
-        default:
-            return CGSize(width: width, height: 130)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == 0 {
-            return UIEdgeInsets(top: 22, left: 16, bottom: 18, right: 16)
-        } else if section == 1 {
-            return UIEdgeInsets(top: 18, left: 16, bottom: 12, right: 16)
-        } else {
-            return UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 1:
-            switch indexPath.row {
-            default:
-                let habitDatesVC = HabitDetailsViewController(habit: HabitsStore.shared.habits[indexPath.item])
-                habitDatesVC.title = HabitsStore.shared.habits[indexPath.item].name
-                navigationController?.pushViewController(habitDatesVC, animated: true)
-            }
-        default:
-            break
-        }
-    }
-}
-
 extension HabitsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -129,7 +81,7 @@ extension HabitsViewController: UICollectionViewDataSource {
             return 0
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
@@ -143,6 +95,50 @@ extension HabitsViewController: UICollectionViewDataSource {
         }
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 1:
+            switch indexPath.row {
+            default:
+                let habitDatesVC = HabitDetailsViewController(habit: HabitsStore.shared.habits[indexPath.item])
+                habitDatesVC.title = HabitsStore.shared.habits[indexPath.item].name
+                navigationController?.pushViewController(habitDatesVC, animated: true)
+            }
+        default:
+            break
+        }
+    }
+}
+
+extension HabitsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width: CGFloat
+        width = collectionView.frame.width - 16 * 2
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: width, height: 60)
+        case 1:
+            return CGSize(width: width, height: 130)
+        default:
+            return CGSize(width: width, height: 130)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch section {
+        case 0:
+            return UIEdgeInsets(top: 22, left: 16, bottom: 12, right: 16)
+        case 1:
+            return UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16)
+        default:
+            return UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        }
+    }
 }
     
 
